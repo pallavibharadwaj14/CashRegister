@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/selected_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Product"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"/>
+
+    <Button
+        android:id="@+id/manager_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manager"
+        app:layout_constraintTop_toTopOf="@id/selected_product"
+        app:layout_constraintBottom_toBottomOf="@id/selected_product"
+        app:layout_constraintStart_toEndOf="@id/selected_product"
+        android:layout_marginStart="16dp"
+        />
+
+    <GridLayout
+        android:id="@+id/numbers_pad"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:columnCount="3"
+        android:rowCount="4"
+        app:layout_constraintTop_toBottomOf="@id/selected_product"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/total_amount"
+        app:layout_constraintBottom_toTopOf="@id/quantity"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        >
+
+        <Button
+            android:id="@+id/button_1"
+            android:text="1"/>
+        <Button
+            android:id="@+id/button_2"
+            android:text="2"/>
+        <Button
+            android:id="@+id/button_3"
+            android:text="3"/>
+        <Button
+            android:id="@+id/button_4"
+            android:text="4"/>
+        <Button
+            android:id="@+id/button_5"
+            android:text="5"/>
+        <Button
+            android:id="@+id/button_6"
+            android:text="6"/>
+        <Button
+            android:id="@+id/button_7"
+            android:text="7"/>
+        <Button
+            android:id="@+id/button_8"
+            android:text="8"/>
+        <Button
+            android:id="@+id/button_9"
+            android:text="9"/>
+        <Button
+            android:id="@+id/button_clear"
+            android:text="C"/>
+        <Button
+            android:id="@+id/button_0"
+            android:text="0"/>
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/total_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Total Amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/numbers_pad"
+        app:layout_constraintTop_toTopOf="@id/numbers_pad" />
+
+    <Button
+        android:id="@+id/buy_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Buy"
+        app:layout_constraintTop_toBottomOf="@id/total_amount"
+        app:layout_constraintStart_toStartOf="@id/total_amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/numbers_pad"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        />
+
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity"
+        app:layout_constraintTop_toBottomOf="@id/numbers_pad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <ListView
+        android:id="@+id/product_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/quantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
