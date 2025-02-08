@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    // Declare class variables for product list, transaction list, and UI components
     private List<Product> products = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
     private StringBuilder quantityBuilder = new StringBuilder();
@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private Button buyButton;
 
     @Override
+    //Activity created
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+    // Initializing UI elements using IDs
         selectedProductTextView = findViewById(R.id.selected_product);
         quantityTextView = findViewById(R.id.quantity);
         totalAmountTextView = findViewById(R.id.total_amount);
@@ -42,19 +43,19 @@ public class MainActivity extends AppCompatActivity {
         buyButton = findViewById(R.id.buy_button);
         Button managerButton = findViewById(R.id.manager_button);
 
-        // Set up product list, click listeners, etc.
+        //Setting default values
         products.add(new Product("T-Shirt", 20, 100));
         products.add(new Product("Jeans", 40, 50));
         products.add(new Product("Jacket", 60, 30));
         products.add(new Product("Shoes", 50, 70));
-
+        //Innitializing UI elements
         setupProductList();
         setupNumberPad();
         setupBuyButton();
         setNumberPadListeners();
         setupManagerButton();
     }
-
+    //Handles the result from the ManagerActivity. Returns updated product and transacti
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             setupProductList();
         }
     }
-
+    // Sets up the product list by using a custom adapter and handling item clicks
     private void setupProductList() {
         // Initialize product list and set item click listener
         productAdapter = new ProductAdapter(this, products);
@@ -126,11 +127,12 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
+    // Sets up the "Buy" button click listener to handle purchase logic
     private void setupBuyButton() {
         buyButton.setOnClickListener(v -> {
             String selectedProductName = selectedProductTextView.getText().toString();
             String quantityStr = quantityTextView.getText().toString();
+            //Both quantity and product is selected
             if (selectedProductName.isEmpty() || quantityStr.isEmpty()) {
                 Toast.makeText(MainActivity.this, "Please select a product and quantity", Toast.LENGTH_SHORT).show();
                 return;
@@ -138,13 +140,14 @@ public class MainActivity extends AppCompatActivity {
 
             int quantity = Integer.parseInt(quantityStr);
             Product selectedProduct = null;
+            // Find the selected product from the product list
             for (Product product : products) {
                 if (product.getName().equals(selectedProductName)) {
                     selectedProduct = product;
                     break;
                 }
             }
-
+// Check if the product is available and if enough inventory exists
             if (selectedProduct == null) {
                 Toast.makeText(MainActivity.this, "Selected product not found", Toast.LENGTH_SHORT).show();
                 return;
@@ -157,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
             int total = quantity * (selectedProduct.getPrice());
             totalAmountTextView.setText("Total: $" + total);
-
+// For debugging
             Log.d("DEBUG", "Selected Product: " + selectedProductName);
             Log.d("DEBUG", "Quantity: " + quantity);
             Log.d("DEBUG", "Total Calculation: " + total);
@@ -165,15 +168,15 @@ public class MainActivity extends AppCompatActivity {
 
             // Update product inventory
             selectedProduct.setInventory(selectedProduct.getInventory() - quantity);
-
+// Add a new transaction entry
             transactions.add(new Transaction(selectedProductName, quantity, total, new Date()));
-
+            // Notify the adapter to refresh the product list view
             productAdapter.notifyDataSetChanged();
-
+// Reset the UI for the next transaction
             resetUI();
         });
     }
-
+//Resets the UI elements to their initial state after a purchase
     private void resetUI() {
         selectedProductTextView.setText("");
         quantityTextView.setText("");

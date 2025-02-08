@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
-
+    // List declared to store transactions
     private List<Transaction> transactions;
 
     @Override
+    //Oncreate method is called when activity is first created
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Set layout for this activity
         setContentView(R.layout.activity_history);
 
         Intent intent = getIntent();
